@@ -1,0 +1,4 @@
+node_modules/
+softedge.db
+.env
+.DS_Store
