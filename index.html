@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoftEdge Solutions | Software Services Company</title>
+    <meta name="description" content="SoftEdge Solutions - Building developer websites and apps. Location: Delhi. Services: Web Development, Mobile Apps, Cloud Solutions, Cybersecurity, QA Testing.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-blue: #2563eb;
+            --primary-blue-hover: #1d4ed8;
+            --dark-navy: #0f172a;
+            --dark-navy-light: #1e293b;
+            --white: #ffffff;
+            --light-gray: #f8fafc;
+            --gray: #94a3b8;
+            --dark-text: #334155;
+            --transition: all 0.3s ease;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark-text);
+            line-height: 1.6;
+            background-color: var(--white);
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        h2 { font-size: 2.5rem; color: var(--dark-navy); margin-bottom: 1.5rem; }
+        h3 { font-size: 1.75rem; color: var(--dark-navy); margin-bottom: 1rem; }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-padding {
+            padding: 5rem 0;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.875rem;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-blue);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-blue-hover);
+            transform: translateY(-2px);
+        }
+
+        .btn-ghost {
+            background-color: transparent;
+            color: var(--primary-blue);
+            border: 2px solid var(--primary-blue);
+        }
+
+        .btn-ghost:hover {
+            background-color: var(--primary-blue);
+            color: var(--white);
+        }
+
+        .btn-white {
+            background-color: var(--white);
+            color: var(--primary-blue);
+        }
+
+        .btn-white:hover {
+            background-color: #f1f5f9;
+            transform: translateY(-2px);
+        }
+
+        /* Animations */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- Navigation --- */
+        .navbar {
+            background-color: var(--dark-navy);
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: var(--shadow-md);
+        }
+
+        .navbar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .logo img {
+            height: 40px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: var(--white);
+            text-transform: uppercase;
+            font-size: 0.875rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-blue);
+        }
+
+        /* Dropdown */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--white);
+            min-width: 220px;
+            box-shadow: var(--shadow-lg);
+            border-radius: 4px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: var(--transition);
+            padding: 0.5rem 0;
+            z-index: 100;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            display: block;
+            padding: 0.75rem 1.5rem;
+            color: var(--dark-text);
+            font-weight: 500;
+            transition: var(--transition);
+            text-transform: none;
+            font-size: 0.95rem;
+        }
+
+        .dropdown-item:hover {
+            background-color: var(--light-gray);
+            color: var(--primary-blue);
+            padding-left: 1.75rem;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .mobile-menu-btn span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: var(--white);
+            margin: 5px 0;
+            transition: var(--transition);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            background-color: var(--dark-navy);
+            background-image: radial-gradient(circle at 70% 30%, #1e293b 0%, #0f172a 60%);
+            padding: 6rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .eyebrow {
+            color: var(--primary-blue);
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            display: block;
+            font-size: 0.875rem;
+        }
+
+        .hero h1 {
+            color: var(--white);
+            font-size: clamp(2.5rem, 5vw, 3.75rem);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero p {
+            color: var(--gray);
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+            max-width: 90%;
+        }
+
+        .hero-illustration {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            height: 400px;
+        }
+
+        /* CSS Abstract Tech Illustration */
+        .tech-shape {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary-blue), transparent);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .shape-1 { width: 300px; height: 300px; opacity: 0.2; right: 10%; top: 10%; }
+        .shape-2 { width: 200px; height: 200px; opacity: 0.3; background: linear-gradient(45deg, #38bdf8, transparent); right: 25%; bottom: 10%; animation-delay: -2s; }
+        .shape-3 { width: 100px; height: 100px; opacity: 0.5; border: 2px solid var(--primary-blue); background: transparent; right: 5%; top: 40%; animation-delay: -4s; }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        /* --- Logo Ticker --- */
+        .ticker-section {
+            background-color: var(--white);
+            padding: 2rem 0;
+            border-bottom: 1px solid #e2e8f0;
+            overflow: hidden;
+        }
+
+        .ticker-wrapper {
+            display: flex;
+            width: calc(200px * 10);
+            animation: scroll 20s linear infinite;
+        }
+
+        .ticker-item {
+            width: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 2rem;
+            color: var(--gray);
+            font-weight: 700;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            filter: grayscale(100%) opacity(0.6);
+            transition: var(--transition);
+        }
+
+        .ticker-item:hover {
+            filter: grayscale(0%) opacity(1);
+            color: var(--dark-navy);
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-200px * 5)); }
+        }
+
+        /* --- About Section --- */
+        .about-section {
+            background-color: var(--white);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+
+        .about-content a {
+            color: var(--primary-blue);
+            font-weight: 600;
+        }
+
+        .about-content a:hover {
+            text-decoration: underline;
+        }
+
+        .about-image {
+            border-radius: 8px;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .about-image img {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        /* --- Expertise Strip --- */
+        .expertise-section {
+            background-color: var(--light-gray);
+        }
+
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .expertise-card {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .expertise-icon {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(37, 99, 235, 0.1);
+            color: var(--primary-blue);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 1.5rem;
+        }
+
+        .expertise-icon svg {
+            width: 30px;
+            height: 30px;
+        }
+
+        .expertise-card h4 {
+            font-size: 1.25rem;
+            color: var(--dark-navy);
+            margin-bottom: 1rem;
+        }
+
+        /* --- Services Section --- */
+        .services-section {
+            background-color: var(--white);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 2rem;
+            transition: var(--transition);
+            background-color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-5px);
+            border-color: var(--primary-blue);
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background-color: var(--primary-blue);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-card-icon {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 1.5rem;
+            color: var(--primary-blue);
+        }
+
+        .service-card h4 {
+            font-size: 1.25rem;
+            color: var(--dark-navy);
+            margin-bottom: 0.75rem;
+        }
+
+        /* --- Technologies Section --- */
+        .tech-section {
+            background-color: var(--light-gray);
+        }
+        
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .tech-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            border: 1px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .tech-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-5px);
+            border-color: var(--primary-blue);
+        }
+        
+        .tech-logo {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 1rem;
+        }
+        
+        .tech-name {
+            font-weight: 600;
+            color: var(--dark-navy);
+            font-size: 1rem;
+        }
+
+        /* --- Stats Counter --- */
+        .stats-section {
+            background-color: var(--dark-navy);
+            color: var(--white);
+            padding: 4rem 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--gray);
+            font-weight: 600;
+        }
+
+        /* --- Contact Form / CTA Section --- */
+        .cta-section {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            text-align: center;
+        }
+        
+        .contact-form {
+            max-width: 600px;
+            margin: 2rem auto 0;
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow-lg);
+            text-align: left;
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            font-family: inherit;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+        
+        .form-submit {
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        /* --- Footer --- */
+        .footer {
+            background-color: var(--dark-navy-light);
+            color: var(--gray);
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-col h5 {
+            color: #38bdf8;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-col p, .footer-col ul li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* --- Media Queries --- */
+        @media (max-width: 992px) {
+            .hero-container, .about-grid {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-illustration {
+                margin-top: 3rem;
+                width: 100%;
+            }
+
+            .about-content {
+                order: 2;
+                text-align: left;
+            }
+
+            .about-image {
+                order: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: var(--dark-navy);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: var(--transition);
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .dropdown-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                background-color: transparent;
+                display: none;
+            }
+
+            .dropdown.active .dropdown-menu {
+                display: block;
+            }
+
+            .dropdown-item {
+                color: var(--gray);
+                text-align: center;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container navbar-container">
+            <a href="#" class="logo">
+                <img src="logo.png" alt="SoftEdge Solutions Logo">
+            </a>
+
+            <div class="nav-links">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <div class="dropdown">
+                    <a href="#services" class="nav-link">Services ▾</a>
+                    <div class="dropdown-menu">
+                        <a href="#services" class="dropdown-item">Web Development</a>
+                        <a href="#services" class="dropdown-item">Mobile Apps</a>
+                        <a href="#services" class="dropdown-item">Cloud Solutions</a>
+                        <a href="#services" class="dropdown-item">Cybersecurity</a>
+                        <a href="#services" class="dropdown-item">QA Testing</a>
+                    </div>
+                </div>
+                <a href="#technologies" class="nav-link">Technologies</a>
+                <a href="#contact" class="nav-link">Contact Us</a>
+                <a href="#contact" class="btn btn-primary">Get A Quote</a>
+            </div>
+
+            <button class="mobile-menu-btn" aria-label="Toggle Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container hero-container">
+            <div class="hero-content fade-up">
+                <span class="eyebrow">Innovation at the Edge</span>
+                <h1>Building Developer Websites and Apps</h1>
+                <p>We deliver cutting-edge software solutions tailored to your business needs, empowering your digital transformation journey from concept to deployment.</p>
+                <a href="#contact" class="btn btn-ghost">Start Your Project</a>
+            </div>
+            <div class="hero-illustration fade-up">
+                <div class="tech-shape shape-1"></div>
+                <div class="tech-shape shape-2"></div>
+                <div class="tech-shape shape-3"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Logo Ticker -->
+    <div class="ticker-section">
+        <div class="ticker-wrapper">
+            <!-- Double the items for seamless scrolling -->
+            <div class="ticker-item">TechCorp</div>
+            <div class="ticker-item">GlobalNet</div>
+            <div class="ticker-item">Innovate IT</div>
+            <div class="ticker-item">CloudSys</div>
+            <div class="ticker-item">DataFlow</div>
+            <div class="ticker-item">TechCorp</div>
+            <div class="ticker-item">GlobalNet</div>
+            <div class="ticker-item">Innovate IT</div>
+            <div class="ticker-item">CloudSys</div>
+            <div class="ticker-item">DataFlow</div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section id="about" class="section-padding about-section">
+        <div class="container about-grid">
+            <div class="about-content fade-up">
+                <h3>Empowering Businesses Through Technology</h3>
+                <p>At <strong>SoftEdge Solutions</strong>, we specialize in delivering high-performance, scalable software solutions. Based in Delhi, we are a team of passionate technologists dedicated to solving complex problems through elegant code.</p>
+                <p>Whether you need robust <a href="#services">Web Development</a>, intuitive <a href="#services">Mobile Apps</a>, or secure <a href="#services">Cloud Solutions</a>, our expertise ensures your project is delivered on time and exceeds expectations.</p>
+            </div>
+            <div class="about-image fade-up">
+                <!-- Placeholder for an actual team or product screenshot -->
+                <div style="background-color: #e2e8f0; width: 100%; padding-top: 75%; border-radius: 8px; position: relative;">
+                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #94a3b8; font-weight: 600;">Office/Team Image</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expertise Strip -->
+    <section class="section-padding expertise-section">
+        <div class="container expertise-grid">
+            <div class="expertise-card fade-up">
+                <div class="expertise-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
+                    </svg>
+                </div>
+                <h4>Global Domains</h4>
+                <p>We serve clients worldwide, delivering solutions adapted to various industry standards and specific regional requirements.</p>
+            </div>
+            <div class="expertise-card fade-up">
+                <div class="expertise-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42" />
+                    </svg>
+                </div>
+                <h4>Premium Design</h4>
+                <p>Our UI/UX team crafts stunning, intuitive interfaces that engage users and elevate your brand's digital presence.</p>
+            </div>
+            <div class="expertise-card fade-up">
+                <div class="expertise-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z" />
+                    </svg>
+                </div>
+                <h4>Program Management</h4>
+                <p>Agile methodologies and transparent communication ensure your projects are delivered efficiently and on schedule.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Grid -->
+    <section id="services" class="section-padding services-section">
+        <div class="container">
+            <div class="section-header fade-up">
+                <h2>Services We Offer</h2>
+                <p style="color: var(--gray);">Comprehensive tech solutions to drive your business forward.</p>
+            </div>
+            
+            <div class="services-grid">
+                <!-- Service 1 -->
+                <div class="service-card fade-up">
+                    <svg class="service-card-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" />
+                    </svg>
+                    <h4>Web Development</h4>
+                    <p>Custom, responsive websites and complex web applications built with modern frameworks.</p>
+                </div>
+                <!-- Service 2 -->
+                <div class="service-card fade-up">
+                    <svg class="service-card-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
+                    </svg>
+                    <h4>Mobile App Dev</h4>
+                    <p>Native and cross-platform mobile applications for iOS and Android platforms.</p>
+                </div>
+                <!-- Service 3 -->
+                <div class="service-card fade-up">
+                    <svg class="service-card-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15a4.5 4.5 0 004.5 4.5H18a3.75 3.75 0 001.332-7.257 3 3 0 00-3.758-3.848 5.25 5.25 0 00-10.233 2.33A4.502 4.502 0 002.25 15z" />
+                    </svg>
+                    <h4>Cloud Solutions</h4>
+                    <p>Scalable cloud infrastructure setup, migration, and management (AWS, Azure, GCP).</p>
+                </div>
+                <!-- Service 4 -->
+                <div class="service-card fade-up">
+                    <svg class="service-card-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+                    </svg>
+                    <h4>Cyber Security</h4>
+                    <p>Comprehensive security audits, vulnerability assessments, and robust protection systems.</p>
+                </div>
+                <!-- Service 5 -->
+                <div class="service-card fade-up">
+                    <svg class="service-card-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+                    </svg>
+                    <h4>Hire Teams</h4>
+                    <p>Augment your existing workforce with our dedicated, pre-vetted senior developers.</p>
+                </div>
+                <!-- Service 6 -->
+                <div class="service-card fade-up">
+                    <svg class="service-card-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <h4>Testing & QA</h4>
+                    <p>Automated and manual testing to ensure bug-free, high-quality software releases.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technologies Section -->
+    <section id="technologies" class="section-padding tech-section">
+        <div class="container">
+            <div class="section-header fade-up">
+                <h2>Technologies We Master</h2>
+                <p style="color: var(--gray);">Our expert engineers build scalable apps using modern tech stacks.</p>
+            </div>
+            
+            <div class="tech-grid">
+                <div class="tech-card fade-up">
+                    <svg class="tech-logo" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M125.438 64C125.438 88.666 99.406 108.667 64 108.667C28.594 108.667 2.562 88.666 2.562 64C2.562 39.333 28.594 19.333 64 19.333C99.406 19.333 125.438 39.333 125.438 64Z" stroke="#61DAFB" stroke-width="4"/>
+                        <path d="M64 125.438C39.334 125.438 19.333 99.406 19.333 64C19.333 28.594 39.334 2.562 64 2.562C88.666 2.562 108.667 28.594 108.667 64C108.667 99.406 88.666 125.438 64 125.438Z" stroke="#61DAFB" stroke-width="4"/>
+                        <path d="M117.202 94.717C95.845 107.047 64.927 101.405 48.146 72.34C31.365 43.275 36.634 11.5 57.992 -0.829999C79.349 -13.16 110.267 -7.518 127.048 21.547C143.829 50.612 138.56 82.387 117.202 94.717Z" stroke="#61DAFB" stroke-width="4" transform="matrix(0.866025 0.5 -0.866025 0.5 64 4)"/>
+                        <circle cx="64" cy="64" r="11" fill="#61DAFB"/>
+                    </svg>
+                    <span class="tech-name">React</span>
+                </div>
+                
+                <div class="tech-card fade-up">
+                    <svg class="tech-logo" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M63.784 10.428l44.331 25.405v50.809L63.784 112.046 19.453 86.642V35.833l44.331-25.405z" fill="#339933"/>
+                        <path d="M78.653 90.72c-2.31 1.488-5.32 2.373-8.86 2.373-9.52 0-14.77-5.918-14.77-16.712V50.778h-7.857v-9.58h7.858v-11.4h11.442v11.4h11.666v9.58h-11.666v23.23c0 4.672 1.83 6.965 5.92 6.965 1.764 0 3.32-.473 4.298-.946v10.613zm11.516-1.12c-5.285 0-9.28-2.6-11.233-6.862h-1.637l-1.077 5.766h-9.98V33.644h11.417v19.467c2.316-2.585 6.002-4.004 9.948-4.004 8.795 0 14.542 6.55 14.542 16.53 0 10.744-6.388 17.585-15.115 17.585l.135-.122h3l.001-4.025zm-2.022-22.1c-4.474 0-7.834 3.013-7.834 7.643 0 4.63 3.36 7.668 7.834 7.668 4.474 0 7.858-3.038 7.858-7.668 0-4.63-3.384-7.643-7.858-7.643z" fill="#fff"/>
+                    </svg>
+                    <span class="tech-name">Node.js</span>
+                </div>
+                
+                <div class="tech-card fade-up">
+                    <svg class="tech-logo" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M63.856 2.502c-30.692 0-33.155 6.525-33.155 6.525l-.014 15.656h34.025v4.717H26.347S14 26.656 14 56.402c0 29.746 11.26 31.066 11.26 31.066h16.299V75.643s-.167-15.12 14.737-15.12h32.22s14.204.148 14.204-14.475v-29.34S104.93 2.502 63.856 2.502zm-16.14 9.873c2.613 0 4.732 2.118 4.732 4.732 0 2.612-2.119 4.73-4.732 4.73-2.614 0-4.733-2.118-4.733-4.73 0-2.614 2.119-4.732 4.733-4.732z" fill="#3776AB"/>
+                        <path d="M64.144 125.498c30.692 0 33.155-6.525 33.155-6.525l.014-15.656H63.288v-4.717h38.365s12.347 2.744 12.347-27.002c0-29.746-11.26-31.066-11.26-31.066H86.441v11.825s.167 15.12-14.737 15.12h-32.22s-14.204-.148-14.204 14.475v29.34s-2.21 14.206 38.864 14.206zm16.14-9.873c-2.613 0-4.732-2.118-4.732-4.732 0-2.612 2.119-4.73 4.732-4.73 2.614 0 4.733 2.118 4.733 4.73 0 2.614-2.119 4.732-4.733 4.732z" fill="#FFD43B"/>
+                    </svg>
+                    <span class="tech-name">Python</span>
+                </div>
+                
+                <div class="tech-card fade-up">
+                    <svg class="tech-logo" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M96.064 74.346L82.164 88.24l22.753 22.747h20.6L96.064 74.346z" fill="#0468D7"/>
+                        <path d="M125.517 38.484H104.92L47.535 95.874 33.642 81.986l61.734-61.734H74.786L9.63 85.394l15.353 15.353 22.552 22.565h20.6l57.382-57.37v-27.458z" fill="#42A5F5"/>
+                    </svg>
+                    <span class="tech-name">Flutter</span>
+                </div>
+                
+                <div class="tech-card fade-up">
+                    <svg class="tech-logo" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M85.908 67.587c-1.397-1.12-3.82-1.92-7.533-2.651l-7.794-1.547c-4.161-.832-6.079-2.028-6.079-4.577 0-2.584 2.378-4.183 6.643-4.183 4.671 0 7.828 1.493 9.493 3.668.618.821 1.706 1.056 2.634.565l5.06-2.637c1.077-.559 1.341-1.962.593-2.88-2.668-3.23-7.568-5.46-13.882-5.94V42.34a2.035 2.035 0 00-2.032-2.032h-5.26c-1.121 0-2.033.911-2.033 2.032v5.187c-6.84 1.03-11.455 4.887-11.455 10.966 0 6.65 4.225 9.873 11.233 11.23l7.006 1.365c4.897.947 6.47 2.454 6.47 4.898 0 3.32-3.325 5.083-7.781 5.083-5.275 0-9.281-2.091-11.533-4.825-.662-.803-1.848-1.04-2.812-.559l-5.32 2.661c-1.066.526-1.343 1.884-.627 2.827 3.197 4.195 8.761 6.84 16.035 7.42v5.617c0 1.12.911 2.032 2.032 2.032h5.26a2.035 2.035 0 002.032-2.032v-5.419c7.734-.848 12.502-4.945 12.502-11.472.001-5.696-3.21-8.547-9.851-13.832z" fill="#FF9900"/>
+                        <path d="M99.697 101.488c-10.741 6.804-23.364 9.87-35.158 9.87-18.423 0-35.337-6.903-46.736-18.3-1.12-1.118-2.956-.848-3.693.57-1.745 3.385-2.583 6.136-2.583 7.854 0 1.258.966 2.023 1.954 2.507 14.156 6.945 31.958 10.373 50.817 10.373 14.398 0 28.529-2.716 41.229-7.925.864-.356 1.144-1.492.518-2.128-1.777-1.8-4.48-3.791-6.348-2.821zM105.106 91.24c-1.353-.162-2.551.91-2.289 2.247 1.054 5.341-2.339 6.852-6.52 7.021-3.67.149-5.118-2.479-5.321-4.717-.11-1.258-1.503-1.872-2.541-1.141-3.87 2.723-6.195 5.253-6.229 6.64-.047 1.83 2.115 2.762 3.65 2.684 10.159-.516 15.656-6.402 14.862-13.111-2.336-1.077 3.513 1.637 4.388.377z" fill="#232F3E"/>
+                    </svg>
+                    <span class="tech-name">AWS</span>
+                </div>
+                
+                <div class="tech-card fade-up">
+                    <svg class="tech-logo" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M63.85 1.57C60.33 1.57 58.07 4 58.07 8.35v34.42l-5.69 13.91c-.96 2.37-3.47 2.37-4.43 0L42.25 42.77V8.35c0-4.35-2.26-6.78-5.78-6.78-3.52 0-5.78 2.43-5.78 6.78V48.1c0 6.6 2.2 12.27 6.36 16.5 3.32 3.38 7.6 5.3 12.23 5.3s8.91-1.92 12.23-5.3c4.16-4.23 6.36-9.9 6.36-16.5V8.35c0-4.35-2.26-6.78-5.78-6.78z" fill="#47A248"/>
+                        <path d="M64 69.9c-4.43 0-8.58-1.78-11.75-4.83-3.17-3.05-4.83-7.23-4.83-11.75V25.1L64 35.84l16.58-10.74v28.22c0 4.52-1.66 8.7-4.83 11.75-3.17 3.05-7.32 4.83-11.75 4.83z" fill="#47A248"/>
+                        <path d="M79.22 8.35c0-4.35-2.26-6.78-5.78-6.78-3.52 0-5.78 2.43-5.78 6.78v34.42l5.69 13.91c.96 2.37 3.47 2.37 4.43 0L85.75 42.77V8.35c0-4.35 2.26-6.78 5.78-6.78 3.52 0 5.78 2.43 5.78 6.78V48.1c0 6.6-2.2 12.27-6.36 16.5-3.32 3.38-7.6 5.3-12.23 5.3-2.07 0-4.1-.38-6-1.07v-4.82c1.77.68 3.7.98 5.67.98 4.43 0 8.58-1.78 11.75-4.83 4.07-3.9 5.86-9.6 5.86-15.9V8.35z" fill="#47A248"/>
+                        <path d="M64 126.43c-6.14 0-11.13-5-11.13-11.13V89.46c0-6.13 5-11.13 11.13-11.13s11.13 5 11.13 11.13v25.84c0 6.13-5 11.13-11.13 11.13zm0-38.39c-2.34 0-4.24 1.9-4.24 4.24v25.84c0 2.34 1.9 4.24 4.24 4.24s4.24-1.9 4.24-4.24V92.28c0-2.34-1.9-4.24-4.24-4.24z" fill="#47A248"/>
+                    </svg>
+                    <span class="tech-name">MongoDB</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Counter -->
+    <section class="stats-section">
+        <div class="container stats-grid">
+            <div class="fade-up">
+                <div class="stat-number">150+</div>
+                <div class="stat-label">Projects Delivered</div>
+            </div>
+            <div class="fade-up">
+                <div class="stat-number">50+</div>
+                <div class="stat-label">Happy Clients</div>
+            </div>
+            <div class="fade-up">
+                <div class="stat-number">8+</div>
+                <div class="stat-label">Years Experience</div>
+            </div>
+            <div class="fade-up">
+                <div class="stat-number">30+</div>
+                <div class="stat-label">Tech Experts</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA / Contact Banner -->
+    <section id="contact" class="section-padding cta-section">
+        <div class="container">
+            <div class="fade-up">
+                <h2 style="color: var(--white); margin-bottom: 1rem;">Ready to Build Something Great?</h2>
+                <p style="font-size: 1.125rem; margin-bottom: 0;">Get in touch with us to discuss your project requirements.</p>
+                
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label style="color: var(--dark-navy); font-weight: 500; display: block; margin-bottom: 0.5rem;">Name *</label>
+                            <input type="text" id="c_name" class="form-control" required placeholder="John Doe">
+                        </div>
+                        <div class="form-group">
+                            <label style="color: var(--dark-navy); font-weight: 500; display: block; margin-bottom: 0.5rem;">Email *</label>
+                            <input type="email" id="c_email" class="form-control" required placeholder="john@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label style="color: var(--dark-navy); font-weight: 500; display: block; margin-bottom: 0.5rem;">Service Needed</label>
+                            <select id="c_service" class="form-control">
+                                <option value="">Select a service...</option>
+                                <option value="Web Development">Web Development</option>
+                                <option value="Mobile App">Mobile App</option>
+                                <option value="Cloud Solutions">Cloud Solutions</option>
+                                <option value="Cybersecurity">Cybersecurity</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label style="color: var(--dark-navy); font-weight: 500; display: block; margin-bottom: 0.5rem;">Message *</label>
+                            <textarea id="c_message" class="form-control" rows="4" required placeholder="Tell us about your project..."></textarea>
+                        </div>
+                        <div id="formStatus" style="display:none; padding: 10px; border-radius: 4px; margin-bottom: 1rem;"></div>
+                        <button type="submit" class="btn btn-primary form-submit">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="#" class="logo" style="margin-bottom: 1.5rem;">
+                        <img src="logo.png" alt="SoftEdge Solutions Logo">
+                    </a>
+                    <p>Building scalable, robust, and beautiful software solutions for forward-thinking companies.</p>
+                </div>
+                <div class="footer-col">
+                    <h5>Find Us</h5>
+                    <p>SoftEdge Solutions Tech Park</p>
+                    <p>Connaught Place</p>
+                    <p>New Delhi, Delhi 110001, India</p>
+                </div>
+                <div class="footer-col">
+                    <h5>Email Us</h5>
+                    <p><a href="mailto:softedge.solutions.tech@gmail.com">softedge.solutions.tech@gmail.com</a></p>
+                    <p>Support: 24/7 online</p>
+                </div>
+                <div class="footer-col">
+                    <h5>Phone Support</h5>
+                    <p>+91 9758065302</p>
+                    <p>Mon - Fri, 9:00 AM - 6:00 PM</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 SoftEdge Solutions. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile menu toggle
+        const mobileBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Mobile dropdown toggle
+        const dropdown = document.querySelector('.dropdown');
+        dropdown.addEventListener('click', (e) => {
+            if (window.innerWidth <= 768) {
+                dropdown.classList.toggle('active');
+            }
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-link:not(.dropdown > .nav-link), .dropdown-item').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Scroll Animations (Intersection Observer)
+        const fadeElements = document.querySelectorAll('.fade-up');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // Optional: Stop observing once visible
+                    // observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        fadeElements.forEach(el => observer.observe(el));
+
+        // Submit Contact Form
+        document.getElementById('contactForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const statusDiv = document.getElementById('formStatus');
+            const submitBtn = e.target.querySelector('button');
+            
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+            
+            const data = {
+                name: document.getElementById('c_name').value,
+                email: document.getElementById('c_email').value,
+                service: document.getElementById('c_service').value,
+                message: document.getElementById('c_message').value,
+                phone: '' // Optional field not in UI right now
+            };
+
+            try {
+                const response = await fetch('http://localhost:3001/api/contact', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                
+                statusDiv.style.display = 'block';
+                if (result.success) {
+                    statusDiv.style.backgroundColor = '#dcfce7';
+                    statusDiv.style.color = '#166534';
+                    statusDiv.textContent = 'Message sent successfully! We will contact you soon.';
+                    e.target.reset();
+                } else {
+                    statusDiv.style.backgroundColor = '#fee2e2';
+                    statusDiv.style.color = '#991b1b';
+                    statusDiv.textContent = result.error || 'Failed to send message.';
+                }
+            } catch (err) {
+                statusDiv.style.display = 'block';
+                statusDiv.style.backgroundColor = '#fee2e2';
+                statusDiv.style.color = '#991b1b';
+                statusDiv.textContent = 'Network error. Make sure the backend is running.';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Send Message';
+            }
+        });
+
+        // Log page visit
+        window.addEventListener('load', () => {
+            fetch('http://localhost:3001/api/visit', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    ip: 'unknown',
+                    userAgent: navigator.userAgent
+                })
+            }).catch(e => console.log('Visit logging failed, backend might be down.'));
+        });
+    </script>
+</body>
+</html>

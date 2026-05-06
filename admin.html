@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | SoftEdge Solutions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #334155;
+            margin: 0;
+            padding: 2rem;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
+        h1 {
+            color: #0f172a;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 1rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        th {
+            background-color: #f1f5f9;
+            color: #0f172a;
+            font-weight: 600;
+        }
+        tr:hover {
+            background-color: #f8fafc;
+        }
+        .date {
+            color: #64748b;
+            font-size: 0.875rem;
+        }
+        .service-badge {
+            background-color: #dbeafe;
+            color: #1d4ed8;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 1rem;
+        }
+        .header h1 {
+            margin: 0;
+            border: none;
+            padding: 0;
+        }
+        .settings-panel {
+            background: #f1f5f9;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            display: none;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        .form-control {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            max-width: 300px;
+        }
+        .btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        .btn:hover { background: #1d4ed8; }
+        .btn-outline {
+            background: transparent;
+            color: #2563eb;
+            border: 1px solid #2563eb;
+        }
+        .btn-outline:hover { background: #2563eb; color: white; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>Contact Form Messages</h1>
+        <button class="btn btn-outline" onclick="document.getElementById('settingsPanel').style.display = document.getElementById('settingsPanel').style.display === 'block' ? 'none' : 'block'">⚙️ Settings</button>
+    </div>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3 style="margin-top: 0;">Change Admin Login</h3>
+        <form id="authForm" onsubmit="changeAuth(event)">
+            <div class="form-group">
+                <label>New Username</label>
+                <input type="text" id="new_user" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label>New Password</label>
+                <input type="password" id="new_pass" class="form-control" required>
+            </div>
+            <button type="submit" class="btn">Update Credentials</button>
+            <span id="authStatus" style="margin-left: 10px; font-weight: 500;"></span>
+        </form>
+    </div>
+
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch; width: 100%;">
+        <table>
+            <thead>
+            <tr>
+                <th>Date</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Service Needed</th>
+                <th>Message</th>
+            </tr>
+        </thead>
+        <tbody id="messagesTable">
+            <tr>
+                <td colspan="5" style="text-align: center;">Loading messages...</td>
+            </tr>
+        </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    async function loadMessages() {
+        const tbody = document.getElementById('messagesTable');
+        try {
+            const response = await fetch('/api/admin/contacts');
+            const data = await response.json();
+            
+            if (data.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" style="text-align: center;">No messages yet.</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = data.map(msg => `
+                <tr>
+                    <td class="date">${new Date(msg.created_at).toLocaleString()}</td>
+                    <td style="font-weight: 500;">${msg.name}</td>
+                    <td><a href="mailto:${msg.email}" style="color: #2563eb; text-decoration: none;">${msg.email}</a></td>
+                    <td>${msg.service ? `<span class="service-badge">${msg.service}</span>` : '-'}</td>
+                    <td style="max-width: 300px; word-wrap: break-word;">${msg.message}</td>
+                </tr>
+            `).join('');
+            
+        } catch (err) {
+            tbody.innerHTML = '<tr><td colspan="5" style="color: red; text-align: center;">Error loading messages. Make sure backend is running.</td></tr>';
+        }
+    }
+
+    async function changeAuth(e) {
+        e.preventDefault();
+        const user = document.getElementById('new_user').value;
+        const pass = document.getElementById('new_pass').value;
+        const status = document.getElementById('authStatus');
+
+        try {
+            const res = await fetch('/api/admin/change-auth', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username: user, password: pass })
+            });
+            const data = await res.json();
+            if (data.success) {
+                status.style.color = 'green';
+                status.textContent = 'Updated! Refresh the page to login with your new credentials.';
+                document.getElementById('authForm').reset();
+            } else {
+                status.style.color = 'red';
+                status.textContent = data.error || 'Update failed.';
+            }
+        } catch (err) {
+            status.style.color = 'red';
+            status.textContent = 'Network error.';
+        }
+    }
+
+    loadMessages();
+</script>
+
+</body>
+</html>
