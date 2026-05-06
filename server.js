@@ -55,9 +55,9 @@ Setting.findOne({ key: 'auth' }).then(setting => {
     adminUser = setting.value.username;
     adminPass = setting.value.password;
   } else {
-    new Setting({ key: 'auth', value: { username: adminUser, password: adminPass } }).save();
+    new Setting({ key: 'auth', value: { username: adminUser, password: adminPass } }).save().catch(e => console.log(e));
   }
-});
+}).catch(err => console.error("Database connection issue (Settings not loaded):", err.message));
 
 const authMiddleware = (req, res, next) => {
   if (req.path === '/admin.html' || req.path.startsWith('/api/admin')) {
