@@ -3,25 +3,24 @@
   "builds": [
     {
       "src": "server.js",
-      "use": "@vercel/node"
-    }
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": ["admin.html"]
+      }
+    },
+    { "src": "index.html", "use": "@vercel/static" },
+    { "src": "logo.png", "use": "@vercel/static" },
+    { "src": "softedge_team_office_1778103095941.png", "use": "@vercel/static" },
+    { "src": "project_bhava_wellness_1778104782860.png", "use": "@vercel/static" },
+    { "src": "project_syncsound_audio_1778104799263.png", "use": "@vercel/static" },
+    { "src": "project_fintech_dashboard_1778103994190.png", "use": "@vercel/static" },
+    { "src": "project_healthcare_platform_1778104013567.png", "use": "@vercel/static" },
+    { "src": "project_ecommerce_app_1778103760951.png", "use": "@vercel/static" }
   ],
   "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "server.js"
-    },
-    {
-      "src": "/admin.html",
-      "dest": "server.js"
-    },
-    {
-      "src": "/",
-      "dest": "/index.html"
-    },
-    {
-      "src": "/(.*\\.(png|jpg|jpeg|gif|svg|ico|css|js|woff|woff2|ttf|eot))",
-      "dest": "/$1"
-    }
+    { "src": "/api/(.*)", "dest": "server.js" },
+    { "src": "/admin.html", "dest": "server.js" },
+    { "src": "/", "dest": "/index.html" },
+    { "src": "/(.*)", "dest": "/$1" }
   ]
 }
