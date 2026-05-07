@@ -12,10 +12,17 @@ const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/softed
 app.use(cors());
 app.use(express.json());
 
-// MongoDB connection
-mongoose.connect(MONGODB_URI)
-  .then(() => console.log('Connected to MongoDB.'))
-  .catch(err => console.error('MongoDB connection error:', err));
+// MongoDB connection with better error handling
+const connectDB = async () => {
+  if (mongoose.connection.readyState >= 1) return;
+  try {
+    await mongoose.connect(MONGODB_URI);
+    console.log('Connected to MongoDB.');
+  } catch (err) {
+    console.error('MongoDB connection error:', err);
+  }
+};
+connectDB();
 
 // Mongoose Schemas
 const Contact = mongoose.model('Contact', new mongoose.Schema({
@@ -76,6 +83,12 @@ const authMiddleware = (req, res, next) => {
 };
 
 app.use(authMiddleware);
+
+// Explicitly serve admin.html so Vercel knows exactly where it is
+app.get('/admin.html', (req, res) => {
+  res.sendFile(path.join(__dirname, 'admin.html'));
+});
+
 app.use(express.static(path.join(__dirname)));
 
 // Track visitor
