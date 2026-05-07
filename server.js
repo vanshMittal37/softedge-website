@@ -164,4 +164,10 @@ app.get('/api/admin/visitors', async (req, res) => {
   }
 });
 
-app.listen(PORT, () => console.log(`SoftEdge backend running at http://localhost:${PORT}`));
+// For local development
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => console.log(`SoftEdge backend running at http://localhost:${PORT}`));
+}
+
+// Export for Vercel serverless
+module.exports = app;

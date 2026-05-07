@@ -966,32 +966,35 @@
         .projects-section {
             background-color: var(--bg-black);
             border-top: 1px solid var(--card-border);
-            overflow: hidden;
         }
 
-        .projects-scroll-wrapper {
-            display: flex;
-            overflow-x: auto;
+        .projects-grid-wrapper {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
-            padding: 2rem 0;
-            scroll-snap-type: x mandatory;
-            scrollbar-width: none; /* Hide scrollbar for Firefox */
-            -ms-overflow-style: none;  /* Hide scrollbar for IE/Edge */
+            margin-top: 3rem;
         }
 
-        .projects-scroll-wrapper::-webkit-scrollbar {
-            display: none; /* Hide scrollbar for Chrome/Safari */
+        @media (max-width: 992px) {
+            .projects-grid-wrapper {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .projects-grid-wrapper {
+                grid-template-columns: 1fr;
+            }
         }
 
         .project-item {
-            flex: 0 0 400px;
             background: var(--card-bg);
             border-radius: var(--radius-lg);
             overflow: hidden;
-            box-shadow: var(--shadow-md);
-            scroll-snap-align: start;
             transition: var(--transition);
             border: 1px solid var(--card-border);
+            display: flex;
+            flex-direction: column;
         }
 
         .project-item:hover {
@@ -1002,13 +1005,16 @@
 
         .project-img {
             width: 100%;
-            height: 250px;
+            height: 220px;
             object-fit: cover;
             border-bottom: 1px solid var(--card-border);
         }
 
         .project-info {
             padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .project-tag {
@@ -1039,16 +1045,11 @@
             align-items: center;
             gap: 5px;
             transition: var(--transition);
+            margin-top: auto;
         }
 
         .project-link:hover {
             gap: 10px;
-        }
-
-        @media (max-width: 768px) {
-            .project-item {
-                flex: 0 0 300px;
-            }
         }
 
         /* --- Footer --- */
@@ -1446,7 +1447,7 @@
                 <p style="color: var(--gray);">Swipe or scroll to explore our latest digital transformations.</p>
             </div>
             
-            <div class="projects-scroll-wrapper stagger-container">
+            <div class="projects-grid-wrapper stagger-container">
                 <!-- Project 1 -->
                 <div class="project-item stagger-item">
                     <div class="shimmer-effect"></div>
@@ -1492,6 +1493,45 @@
                         <h4>AcciSaviour Alert</h4>
                         <p>Automatic accident detection using device sensors with ISRO's Bhuvan API for precise real-time emergency response.</p>
                         <p style="font-size: 0.8rem; font-weight: 600; color: var(--primary-blue);">Java, Firebase, Bhuvan API, Android Sensors</p>
+                        <a href="#" class="project-link">View Project ➔</a>
+                    </div>
+                </div>
+
+                <!-- Project 5: Snapcart -->
+                <div class="project-item stagger-item">
+                    <div class="shimmer-effect"></div>
+                    <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=600&q=80" alt="Snapcart Grocery Website" class="project-img">
+                    <div class="project-info">
+                        <span class="project-tag">E-Commerce | 2025</span>
+                        <h4>Snapcart – Grocery Delivery</h4>
+                        <p>Full-stack grocery e-commerce platform with real-time inventory, cart management, secure checkout, and an admin order dashboard.</p>
+                        <p style="font-size: 0.8rem; font-weight: 600; color: var(--primary-blue);">Next.js, MongoDB, Stripe, Tailwind CSS, Redux</p>
+                        <a href="#" class="project-link">View Project ➔</a>
+                    </div>
+                </div>
+
+                <!-- Project 6: YogaGuru -->
+                <div class="project-item stagger-item">
+                    <div class="shimmer-effect"></div>
+                    <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=600&q=80" alt="YogaGuru Platform" class="project-img">
+                    <div class="project-info">
+                        <span class="project-tag">Ed-Tech | 2025</span>
+                        <h4>YogaGuru – Wellness Platform</h4>
+                        <p>Premium yoga & wellness learning platform with course management, live sessions, student dashboards, and achievement tracking.</p>
+                        <p style="font-size: 0.8rem; font-weight: 600; color: var(--primary-blue);">Next.js, Node.js, PostgreSQL, Tailwind CSS, JWT Auth</p>
+                        <a href="#" class="project-link">View Project ➔</a>
+                    </div>
+                </div>
+
+                <!-- Project 7: EV Pulse -->
+                <div class="project-item stagger-item">
+                    <div class="shimmer-effect"></div>
+                    <img src="https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=600&q=80" alt="EV Pulse Platform" class="project-img">
+                    <div class="project-info">
+                        <span class="project-tag">Smart Infrastructure | 2025</span>
+                        <h4>EV Pulse – EV Network Hub</h4>
+                        <p>Unified platform connecting EV charging stations and service centers with real-time slot booking, route planning, and fleet management.</p>
+                        <p style="font-size: 0.8rem; font-weight: 600; color: var(--primary-blue);">Node.js, Express, MongoDB, Socket.IO, Google Maps API</p>
                         <a href="#" class="project-link">View Project ➔</a>
                     </div>
                 </div>
@@ -1560,6 +1600,40 @@
                         <path d="M64 126.43c-6.14 0-11.13-5-11.13-11.13V89.46c0-6.13 5-11.13 11.13-11.13s11.13 5 11.13 11.13v25.84c0 6.13-5 11.13-11.13 11.13zm0-38.39c-2.34 0-4.24 1.9-4.24 4.24v25.84c0 2.34 1.9 4.24 4.24 4.24s4.24-1.9 4.24-4.24V92.28c0-2.34-1.9-4.24-4.24-4.24z" fill="#47A248"/>
                     </svg>
                     <span class="tech-name">MongoDB</span>
+                </div>
+
+                <div class="tech-card stagger-item">
+                    <div class="shimmer-effect"></div>
+                    <svg class="tech-logo" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M64 0C28.656 0 0 28.656 0 64s28.656 64 64 64 64-28.656 64-64S99.344 0 64 0zm0 112c-26.51 0-48-21.49-48-48s21.49-48 48-48 48 21.49 48 48-21.49 48-48 48z" fill="#FFFFFF"/>
+                        <path d="M82 48h-8v12h8v8h-8v12h8v8h-16V40h16v8zM58 48h-8v32h8V48zM46 48h-8v32h8V48z" fill="#FFFFFF"/>
+                    </svg>
+                    <span class="tech-name">Express.js</span>
+                </div>
+
+                <div class="tech-card stagger-item">
+                    <div class="shimmer-effect"></div>
+                    <svg class="tech-logo" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M64 0C28.656 0 0 28.656 0 64s28.656 64 64 64 64-28.656 64-64S99.344 0 64 0zm32 94L54 44v44H42V34h10l42 50V34h12v60z" fill="#FFFFFF"/>
+                    </svg>
+                    <span class="tech-name">Next.js</span>
+                </div>
+
+                <div class="tech-card stagger-item">
+                    <div class="shimmer-effect"></div>
+                    <svg class="tech-logo" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1.5 1.5h125v125H1.5V1.5z" fill="#3178C6"/>
+                        <path d="M126.5 126.5v-40.3c-7.9 6.2-18.7 10-30.1 10-23.7 0-38.3-13.4-38.3-37.1s14.6-37.1 38.3-37.1c11.4 0 22.2 3.8 30.1 10V22c-7.9-5-17.7-7.9-28.9-7.9-29.9 0-51.5 19.3-51.5 49.9s21.6 49.9 51.5 49.9c11.2 0 21-2.9 28.9-7.4zM42.1 36.1v76.8h13.2V36.1h21.1V23.7H8.3v12.4h33.8z" fill="#FFFFFF"/>
+                    </svg>
+                    <span class="tech-name">TypeScript</span>
+                </div>
+
+                <div class="tech-card stagger-item">
+                    <div class="shimmer-effect"></div>
+                    <svg class="tech-logo" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M64 34c-13.333-13.333-25.333-13.333-36 0-16 20-4 44 20 52-16-12-16-24-4-36 6-6 13.333-8.667 20-8 6.667 0.667 12.667 3.333 18 8 10.667 9.333 10.667 18.667 0 28-13.333 13.333-25.333 13.333-36 0C30 58 42 34 66 26c16 12 16 24 4 36-6 6-13.333 8.667-20 8-6.667-0.667-12.667-3.333-18-8-10.667-9.333-10.667-18.667 0-28z" fill="#38B2AC"/>
+                    </svg>
+                    <span class="tech-name">Tailwind CSS</span>
                 </div>
             </div>
         </div>
