@@ -34,6 +34,7 @@
 
         html {
             scroll-behavior: smooth;
+            overflow-x: hidden;
         }
 
         body {
@@ -42,6 +43,13 @@
             line-height: 1.6;
             background-color: var(--bg-black);
             overflow-x: hidden;
+            max-width: 100vw;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
         }
 
         h1, h2, h3, h4 {
@@ -63,14 +71,6 @@
             }
         }
 
-        @media (max-width: 600px) {
-            .bento-grid {
-                grid-template-columns: 1fr;
-                grid-auto-rows: auto;
-            }
-            .bento-card.wide, .bento-card.tall { grid-column: span 1; grid-row: span 1; }
-            .bento-card { padding: 1.5rem; min-height: 200px; }
-        }
 
         .bento-card {
             background: var(--card-bg);
@@ -96,6 +96,18 @@
         .bento-card.tall { grid-row: span 2; }
 
         /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: var(--transition);
+            font-weight: 600;
+            font-family: inherit;
+        }
+
         .btn-primary {
             background-color: var(--accent-green);
             color: var(--bg-black);
@@ -388,6 +400,7 @@
             padding: 6rem 0;
             position: relative;
             overflow: hidden;
+            width: 100%;
         }
 
         .hero-container {
@@ -593,14 +606,15 @@
         /* Mesh Gradients */
         .mesh-glow {
             position: absolute;
-            width: 600px;
-            height: 600px;
+            width: min(600px, 80vw);
+            height: min(600px, 80vw);
             border-radius: 50%;
             background: radial-gradient(circle, var(--accent-green) 0%, transparent 70%);
             filter: blur(120px);
             opacity: 0.15;
             z-index: 0;
             pointer-events: none;
+            overflow: hidden;
         }
 
         .mesh-blue {
@@ -610,7 +624,7 @@
 
         /* Section Headers */
         .section-header h2 {
-            font-size: 3.5rem;
+            font-size: clamp(1.8rem, 5vw, 3.5rem);
             margin-bottom: 1rem;
         }
 
@@ -634,6 +648,8 @@
         /* --- About Section --- */
         .about-section {
             background-color: var(--bg-black);
+            position: relative;
+            overflow: hidden;
         }
 
         .about-grid {
@@ -675,11 +691,13 @@
         .expertise-section {
             background-color: var(--bg-black);
             border-top: 1px solid var(--card-border);
+            position: relative;
+            overflow: hidden;
         }
 
         .expertise-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
             gap: 2rem;
         }
 
@@ -729,6 +747,8 @@
         /* --- Services Section --- */
         .services-section {
             background-color: var(--bg-black);
+            position: relative;
+            overflow: hidden;
         }
 
         .section-header {
@@ -738,7 +758,7 @@
 
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
             gap: 2rem;
         }
 
@@ -796,8 +816,8 @@
         
         .tech-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 1.5rem;
             margin-top: 3rem;
         }
         
@@ -842,7 +862,7 @@
 
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(4, 1fr);
             gap: 2rem;
             text-align: center;
         }
@@ -914,11 +934,13 @@
         .process-section {
             background-color: var(--bg-black);
             border-top: 1px solid var(--card-border);
+            position: relative;
+            overflow: hidden;
         }
 
         .process-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(4, 1fr);
             gap: 2rem;
             margin-top: 3rem;
             position: relative;
@@ -983,7 +1005,7 @@
             }
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
             .projects-grid-wrapper {
                 grid-template-columns: 1fr;
             }
@@ -1063,8 +1085,8 @@
 
         .footer-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+            gap: 2rem;
             margin-bottom: 3rem;
         }
 
@@ -1086,10 +1108,66 @@
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
+        /* --- Hero CSS Classes (moved from inline styles) --- */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero-inner-container {
+            justify-content: center;
+        }
+
+        .hero-text-block {
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .hero-eyebrow {
+            color: var(--accent-green);
+        }
+
+        .hero-title {
+            font-size: clamp(2rem, 8vw, 5rem);
+            margin-top: 1rem;
+            line-height: 1.1;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            margin: 2rem auto;
+            max-width: 700px;
+        }
+
+        .hero-cta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .section-title-lg {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+        }
+
+        .section-title-md {
+            font-size: clamp(1.8rem, 4.5vw, 3rem);
+        }
+
         /* --- Media Queries --- */
         @media (max-width: 992px) {
-            .hero-container, .about-grid {
+            .hero-container {
                 flex-direction: column;
+                text-align: center;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
                 text-align: center;
             }
 
@@ -1109,13 +1187,17 @@
         }
 
         @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
             .nav-links {
                 position: fixed;
                 top: 0;
                 left: -100%;
                 width: 100%;
                 height: 100vh;
-                background-color: #000000; /* Solid black to prevent transparency issues */
+                background-color: #000000;
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
@@ -1162,13 +1244,160 @@
                 text-align: center;
                 font-size: 1.2rem;
             }
-            
-            .hero h1 {
-                font-size: 2.5rem;
+
+            .hero-section {
+                padding-top: 90px;
             }
 
-            .section-header h2 {
-                font-size: 2.5rem;
+            .hero-subtitle {
+                max-width: 100%;
+                font-size: 1rem !important;
+            }
+
+            .hero-eyebrow {
+                letter-spacing: 1px;
+                font-size: 0.75rem;
+            }
+
+            .hero-title {
+                font-size: 2.2rem !important;
+            }
+
+            .section-header {
+                text-align: center !important;
+                margin-bottom: 2.5rem !important;
+            }
+
+            .section-padding {
+                padding: 4rem 0;
+            }
+
+            .container {
+                padding: 0 1.25rem;
+            }
+
+            .bento-grid {
+                grid-template-columns: 1fr !important;
+                grid-auto-rows: auto;
+            }
+
+            .bento-card.wide,
+            .bento-card.tall {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+
+            .bento-card {
+                padding: 1.5rem;
+                min-height: auto;
+            }
+
+            .projects-grid-wrapper {
+                grid-template-columns: 1fr !important;
+            }
+
+            .process-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .tech-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .contact-form {
+                padding: 1.5rem;
+                margin: 1.5rem 0 0;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+            }
+
+            .logo img {
+                height: 32px;
+            }
+
+            .ticker-item {
+                padding: 0 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .mesh-glow {
+                width: 300px !important;
+                height: 300px !important;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-cta {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .hero-cta .btn {
+                width: 100%;
+                max-width: 320px;
+            }
+
+            .hero-title {
+                font-size: 1.8rem !important;
+            }
+
+            .process-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tech-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-number {
+                font-size: 2.2rem;
+            }
+
+            .close-menu-btn {
+                display: none;
+                position: absolute;
+                top: 1.5rem;
+                right: 1.5rem;
+                background: rgba(255, 255, 255, 0.05);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 50%;
+                color: var(--white);
+                width: 45px;
+                height: 45px;
+                cursor: pointer;
+                z-index: 1001;
+                transition: var(--transition);
+                align-items: center;
+                justify-content: center;
+            }
+
+            .close-menu-btn:hover {
+                background: rgba(38, 208, 124, 0.2);
+                border-color: var(--accent-green);
+                transform: rotate(90deg);
+            }
+
+            .close-menu-btn svg {
+                width: 24px;
+                height: 24px;
+                stroke: var(--white);
+            }
+
+            @media (max-width: 768px) {
+                .close-menu-btn {
+                    display: flex;
+                }
             }
         }
     </style>
@@ -1184,6 +1413,12 @@
             </a>
 
             <div class="nav-links">
+                <button class="close-menu-btn" aria-label="Close Menu">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
                 <a href="#home" class="nav-link">Home</a>
                 <a href="#about" class="nav-link">About</a>
                 <a href="#services" class="nav-link">Services</a>
@@ -1202,8 +1437,8 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="hero" style="min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center;">
-            <div class="mesh-glow" style="top: 10%; left: 50%; transform: translateX(-50%); width: 800px; height: 800px;"></div>
+    <section id="home" class="hero hero-section">
+            <div class="mesh-glow" style="top: 10%; left: 50%; transform: translateX(-50%);"></div>
             <div class="hero-bg-viz">
                 <div class="grid-overlay"></div>
                 <div class="data-particle" style="left: 10%; animation-duration: 8s; animation-delay: 1s;"></div>
@@ -1212,12 +1447,12 @@
                 <div class="data-particle" style="left: 70%; animation-duration: 15s; animation-delay: 5s;"></div>
                 <div class="data-particle" style="left: 90%; animation-duration: 9s; animation-delay: 2s;"></div>
             </div>
-            <div class="container hero-container" style="justify-content: center;">
-                <div class="hero-content fade-up" style="max-width: 900px;">
-                    <span class="eyebrow" style="color: var(--accent-green);">Innovation at the Edge</span>
-                    <h1 style="font-size: 5rem; margin-top: 1rem;">Building <span class="highlight">Developer</span> Websites & Apps</h1>
-                    <p style="font-size: 1.25rem; margin: 2rem auto; max-width: 700px;">We deliver cutting-edge software solutions tailored to your business needs, empowering your digital transformation journey from concept to deployment.</p>
-                    <div style="display: flex; gap: 1rem; justify-content: center;">
+            <div class="container hero-container hero-inner-container">
+                <div class="hero-content hero-text-block fade-up">
+                    <span class="eyebrow hero-eyebrow">Innovation at the Edge</span>
+                    <h1 class="hero-title">Building <span class="highlight">Developer</span> Websites &amp; Apps</h1>
+                    <p class="hero-subtitle">We deliver cutting-edge software solutions tailored to your business needs, empowering your digital transformation journey from concept to deployment.</p>
+                    <div class="hero-cta">
                         <a href="#contact" class="btn btn-primary pulse">Start Your Project</a>
                         <a href="#projects" class="btn btn-ghost">View Portfolio</a>
                     </div>
@@ -1251,7 +1486,7 @@
         <div class="mesh-glow mesh-blue" style="top: -10%; right: 0;"></div>
         <div class="container">
             <div class="section-header fade-up" style="text-align: left; margin-bottom: 4rem;">
-                <h2 style="font-size: 3rem;">We are <span class="highlight">SoftEdge</span></h2>
+                <h2 class="section-title-md">We are <span class="highlight">SoftEdge</span></h2>
                 <p>Redefining digital boundaries through elite software engineering.</p>
             </div>
             
@@ -1295,8 +1530,8 @@
     <section class="section-padding process-section" style="position: relative; background: var(--bg-black);">
         <div class="mesh-glow mesh-blue" style="top: 20%; left: 0;"></div>
         <div class="container">
-            <div class="section-header fade-up" style="text-align: center; margin-bottom: 5rem;">
-                <h2 style="font-size: 3.5rem;">Turning <span class="highlight">Idea</span> Into Reality</h2>
+            <div class="section-header fade-up" style="text-align: center; margin-bottom: 4rem;">
+                <h2 class="section-title-lg">Turning <span class="highlight">Idea</span> Into Reality</h2>
                 <p>Our minimalist approach to complex software development.</p>
             </div>
             <div class="process-grid stagger-container">
@@ -1353,7 +1588,7 @@
         <div class="mesh-glow mesh-blue" style="bottom: 0; right: 0;"></div>
         <div class="container">
             <div class="section-header fade-up" style="text-align: left; margin-bottom: 4rem;">
-                <h2 style="font-size: 3rem;">We Build <span class="highlight">Everything</span> You Need</h2>
+                <h2 class="section-title-md">We Build <span class="highlight">Everything</span> You Need</h2>
                 <p>From global domains to premium design, we cover the full spectrum of software engineering.</p>
             </div>
             <div class="bento-grid stagger-container">
@@ -1396,7 +1631,7 @@
         <div class="mesh-glow" style="top: 0; left: 0;"></div>
         <div class="container">
             <div class="section-header fade-up" style="text-align: left; margin-bottom: 4rem;">
-                <h2 style="font-size: 3rem;">Services <span class="highlight">We Master</span></h2>
+                <h2 class="section-title-md">Services <span class="highlight">We Master</span></h2>
                 <p>Comprehensive tech solutions to drive your business forward.</p>
             </div>
             
@@ -1851,6 +2086,12 @@
         mobileBtn.addEventListener('click', () => {
             navLinks.classList.toggle('active');
             mobileBtn.classList.toggle('active');
+        });
+
+        const closeBtn = document.querySelector('.close-menu-btn');
+        closeBtn.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            mobileBtn.classList.remove('active');
         });
 
         // Close mobile menu when clicking a link
